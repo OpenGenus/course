@@ -30,23 +30,23 @@ post_save.connect(create_profile, sender=User)
 class Course(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
-    authors = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='authors_list')
+    authors = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='course_author')
     duration = models.TimeField()
     level = models.CharField(max_length=20)
     audience = models.CharField(max_length=20)
 
 
 class Section(models.Model):
-    courseId = models.ForeignKey(Course)
+    courseId = models.ForeignKey(Course, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
-    authors = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='authors_list')
+    authors = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='section_author')
     duration = models.TimeField()
 
 
 class CourseItem(models.Model):
-    section = models.OneToOneField(Section)
-    course = models.OneToOneField(Course)
+    section = models.OneToOneField(Section, on_delete=models.CASCADE)
+    course = models.OneToOneField(Course, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     sideLink = models.CharField(max_length=50)
     codeLink = models.CharField(max_length=50)

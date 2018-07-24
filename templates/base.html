@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Course</title>
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" integrity="sha256-uXf0U0UCIqBp2J3S53b28h+fpC9uFcA8f+b/NNmiwVk="
+      crossorigin="anonymous" />
+
+          <link rel="stylesheet" type="text/css"  href="{% static '/css/style.css' %}">
+
+    {% block head %}
+
+    {% endblock %}
+
+    </head>
+
+<body class="bodydark">
+
+  <nav class="navbar navbar-expand-md fixed-top navbar-light navbarlight">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+          <a class="nav-link" href="">
+            <i class="fa fa-lg fa-twitter"></i>
+          </a>
+      </li>
+      <li class="nav-item">
+           <a class="nav-link" href="">
+             <i class="fa fa-lg fa-linkedin"></i>
+           </a>
+       </li>
+       <li class="nav-item">
+           <a class="nav-link" href="">
+             <i class="fa fa-lg fa-github"></i>
+           </a>
+       </li>
+       <li class="nav-item">
+           <a class="nav-link" href="">
+             <i class="fab fa-discourse"></i>
+           </a>
+       </li>
+       </ul>
+
+  </nav>
+
+
+  <div class="container-fluid">
+
+     {% block content %}
+     {% endblock content %}
+
+     </div>
+
+
+
+</main>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+{% block scripts %}
+
+{% endblock %}
+
+</body>
+
+</html>
