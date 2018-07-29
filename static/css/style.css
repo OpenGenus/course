@@ -1,3 +1,15 @@
 body {
-    background: aqua;
+padding-top: 6em;
+background-color: lightblue;
+    text-align: center;
 }
+h1 {
+    padding: 0.5em 0 0.5em 0;
+    background-color: #3875d7;
+}
+.navbarlight{
+background: white;
+ }
+ .bodydark{
+ background: rgba(50,50,50,0.3);
+  }
