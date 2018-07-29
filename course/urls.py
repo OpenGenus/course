@@ -19,4 +19,9 @@ from django.conf.urls import url, include
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^home/', include('mainapp.urls')),
+    url(r'^admin/', admin.site.urls, name='admin_URLs'),
+    url(r'^home/', views.home, name='home'),
+    url(r'^(?P<course>[^/]+)/$', views.course, name='course'),
+    url(r'^(?P<course>[^/]+)/(?P<section>[^/]+)/$', views.section, name='section'),
+    url(r'^(?P<course>[^/]+)/(?P<section>[^/]+)/(?P<item>[^/]+)$', views.item, name='item'),
 ]
