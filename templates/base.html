@@ -3,7 +3,10 @@
 <html>
 
 <head>
-    <title> Course</title>
+    <title>Course</title>
+    {% block title %}
+
+    {% endblock %}
 
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -14,7 +17,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" integrity="sha256-uXf0U0UCIqBp2J3S53b28h+fpC9uFcA8f+b/NNmiwVk="
       crossorigin="anonymous" />
 
-          <link rel="stylesheet" type="text/css"  href="{% static '/css/style.css' %}">
+          <link rel="stylesheet" type="text/css"  href="{% static 'css/style.css' %}">
 
     {% block head %}
 

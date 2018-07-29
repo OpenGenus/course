@@ -1,9 +1,29 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block title %}
+    <title>Home</title>
+{% endblock %}
+
 {% block head %}
 {% endblock %}
 
 {% block content %}
     <h1 style="text-align: center">Home</h1>
+
+    <a id='c1' href="">Course 1</a>
+    <a id='c2' href="">Course 2</a>
+    <a id='c3' href="">Course 3</a>
+
 {% endblock%}
+
+{% block scripts %}
+    <script>
+    $(document).ready( function() {
+        $(".a").click( function(event) {
+            event.preventDefault();
+            console.log($(this).id);
+        });
+    });
+    </script>
+{% endblock %}
