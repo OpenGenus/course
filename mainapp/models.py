@@ -45,11 +45,10 @@ class Section(models.Model):
 
 
 class CourseItem(models.Model):
-    section = models.OneToOneField(Section, on_delete=models.CASCADE)
     course = models.OneToOneField(Course, on_delete=models.CASCADE)
+    section = models.OneToOneField(Section, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     sideLink = models.CharField(max_length=50)
     codeLink = models.CharField(max_length=50)
     textExplanation = models.TextField()
-
 
