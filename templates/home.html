@@ -11,11 +11,11 @@
 {% block content %}
 <ul class="table" style="text-align: left">
     {% for course in courses %}
-        <li><a class="course">{{course.title}}</a></li>
+        <li><a class="course">{{course.title}}</a>
         <ul style="display: none">
         {% for section in sections %}
             {% if section.courseId == course %}
-                <li><a class="section">{{section.title}}</a></li>
+                <li><a class="section">{{section.title}}</a>
             {% endif %}
             <ul style="display: none">
             {% for item in items %}
@@ -23,9 +23,9 @@
                     <li><a class="item">{{item.title}}</a></li>
                 {% endif %}
             {% endfor %}
-            </ul>
+            </ul></li>
         {% endfor %}
-        </ul>
+        </ul></li>
     {% endfor %}
 </ul>
 {% endblock%}
@@ -35,7 +35,7 @@
         $(document).ready(function() {
             console.log("ready");
             $("a.section, a.course").click(function() {
-                var div = $(this).parent().siblings("ul");
+                var div = $(this).siblings("ul");
                 console.log(div);
                 if(!div.is(":visible")) {
                     div.show();
