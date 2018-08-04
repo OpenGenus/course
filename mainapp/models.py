@@ -48,8 +48,8 @@ class Section(models.Model):
 
 class CourseItem(models.Model):
     id = models.AutoField(primary_key=True, null=False, unique=True)
-    courseId = models.OneToOneField(Course, on_delete=models.CASCADE)
-    sectionId = models.OneToOneField(Section, on_delete=models.CASCADE)
+    courseId = models.ForeignKey(Course, on_delete=models.CASCADE)
+    sectionId = models.ForeignKey(Section, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     sideLink = models.CharField(max_length=50)
     codeLink = models.CharField(max_length=50)
