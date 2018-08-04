@@ -9,12 +9,21 @@
 {% endblock %}
 
 {% block content %}
-<ul class="course" style="text-align: left">
+<ul class="table" style="text-align: left">
     {% for course in courses %}
-        <li><a>{{course.title}}</a>
-        <ul hidden>
+        <li><a class="course">{{course.title}}</a></li>
+        <ul style="display: none">
         {% for section in sections %}
-            <li><a>{{section.title}}</a></li>
+            {% if section.courseId == course %}
+                <li><a class="section">{{section.title}}</a></li>
+            {% endif %}
+            <ul style="display: none">
+            {% for item in items %}
+                {% if item.courseId == course and item.sectionId == section %}
+                    <li><a class="item">{{item.title}}</a></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
         {% endfor %}
         </ul>
     {% endfor %}
@@ -22,12 +31,18 @@
 {% endblock%}
 
 {% block scripts %}
-    <script>
-    $(document).ready( function() {
-        $(".a").click( function(event) {
-            event.preventDefault();
-            console.log($(this).id);
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            console.log("ready");
+            $("a.section, a.course").click(function() {
+                var div = $(this).parent().siblings("ul");
+                console.log(div);
+                if(!div.is(":visible")) {
+                    div.show();
+                } else {
+                    div.hide();
+                }
+            });
         });
-    });
     </script>
 {% endblock %}
