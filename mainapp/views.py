@@ -14,15 +14,22 @@ def home(request):
 
 
 def course(request, course_name):
-    course = get_object_or_404(models.Course, url_endpoint__iexact=course_name)
+    course = get_object_or_404(models.Course, title__iexact=course_name)
     context = {"course": course}
-    return render(request, '/{0}/'.format(course.title), context)
+    return render(request, 'course/{0}/'.format(course.title), context)
 
 
-def section(request):
-    pass
+def section(request, course_name, section_name):
+    course = get_object_or_404(models.Course, title__iexact=course_name)
+    section = get_object_or_404(models.Section, title__iexact=section_name)
+    context = {"section": section}
+    return render(request, 'course/{0}/{1}/'.format(course.title, section.title), context)
 
 
-def item(request):
-    pass
+def item(request, course_name, section_name, item_name):
+    course = get_object_or_404(models.Course, title__iexact=course_name)
+    section = get_object_or_404(models.Section, title__iexact=section_name)
+    item = get_object_or_404(models.Section, title__iexact=item_name)
+    context = {"item": item}
+    return render(request, 'course/{0}/{1}/{2}/'.format(course.title, section.title, item.title), context)
 
