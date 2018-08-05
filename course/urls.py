@@ -19,7 +19,7 @@ from mainapp import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin_URLs'),
-    url(r'^course/', views.home, name='course'),
+    url(r'^home/', views.home, name='course'),
     url(r'^course/(?P<course_name>[^/]+)/$', views.course, name='course'),
     url(r'^course/(?P<course_name>[^/]+)/(?P<section_name>[^/]+)/$', views.section, name='section'),
     url(r'^course/(?P<course_name>[^/]+)/(?P<section_name>[^/]+)/(?P<item_name>[^/]+)$', views.item, name='item'),
