@@ -1,26 +1,10 @@
-{% extends 'base.html' %}
-{% load staticfiles %}
-
-{% block title %}
-    <title>Course</title>
-{% endblock %}
-
-{% block head %}
-{% endblock %}
-
-{% block content %}
-
-{% endblock%}
-
-{% block scripts %}
-    <script type="text/javascript" >
-        $(document).ready(function() {
-            console.log("ready");
-            $("ul.course li a").click(function() {
-                console.log("clicked");
-                console.log(this);
-                console.log($(this).sibling("ul"))
-            });
-        });
-    </script>
-{% endblock %}
+{% for c in course %}
+    <div class="course">
+        <p id="title">c.title</p>
+        <p id="description">c.description</p>
+        <p id="authors">c.authors</p>
+        <p id="duration">c.duration</p>
+        <p id="level">c.level</p>
+        <p id="audience">c.audience</p>
+    </div>
+{% endfor %}

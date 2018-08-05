@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% for c in item %}
+    <div class="course">
+        <p id="title">c.title</p>
+        <p id="side-link">c.sideLink</p>
+        <p id="code-link">c.codeLink</p>
+        <p id="text">c.textExplanation</p>
+    </div>
+{% endfor %}

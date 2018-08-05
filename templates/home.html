@@ -11,16 +11,16 @@
 {% block content %}
 <ul class="table" style="text-align: left">
     {% for course in courses %}
-        <li><a class="course">{{course.title}}</a>
+        <li><a class="course" href={% url "course" course.title %}>{{course.title}}</a>
         <ul style="display: none">
         {% for section in sections %}
             {% if section.courseId == course %}
-                <li><a class="section">{{section.title}}</a>
+                <li><a class="section" href={% url "section" course.title section.title %}>{{section.title}}</a>
             {% endif %}
             <ul style="display: none">
             {% for item in items %}
                 {% if item.courseId == course and item.sectionId == section %}
-                    <li><a class="item">{{item.title}}</a></li>
+                    <li><a class="item" href={% url "item" course.title section.title item.title %}>{{item.title}}</a></li>
                 {% endif %}
             {% endfor %}
             </ul></li>
@@ -28,20 +28,50 @@
         </ul></li>
     {% endfor %}
 </ul>
+
+<p id="content">
+
+</p>
 {% endblock%}
 
 {% block scripts %}
     <script type="text/javascript" >
         $(document).ready(function() {
             console.log("ready");
-            $("a.section, a.course").click(function() {
+            $("a.section, a.course").click(function(event) {
+                event.preventDefault();
                 var div = $(this).siblings("ul");
-                console.log(div);
                 if(!div.is(":visible")) {
                     div.show();
                 } else {
                     div.hide();
                 }
+                var url = $(this).attr("href");
+                console.log(url);
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(data) {
+                        document.getElementById("content").innerHTML = data;
+                    },
+                    error: function() {
+                        document.getElementById("content").innerHTML = "ERROR";
+                    }
+                });
+            });
+            $("a.item").click(function(event) {
+                event.preventDefault();
+                var url = $(this).attr("href");
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(data) {
+                        document.getElementById("content").innerHTML = data;
+                    },
+                    error: function() {
+                        document.getElementById("content").innerHTML = "ERROR";
+                    }
+                });
             });
         });
     </script>
