@@ -16,7 +16,7 @@ def home(request):
 def course(request, course_name):
     course = get_object_or_404(models.Course, title__iexact=course_name)
     context = {"course": course}
-    return render(request, 'course/{0}/'.format(course.title), context)
+    return render(request, 'course.html', context)
 
 
 def section(request, course_name, section_name):
