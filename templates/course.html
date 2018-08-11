@@ -1,10 +1,8 @@
-{% for c in course %}
-    <div class="course">
-        <p id="title">c.title</p>
-        <p id="description">c.description</p>
-        <p id="authors">c.authors</p>
-        <p id="duration">c.duration</p>
-        <p id="level">c.level</p>
-        <p id="audience">c.audience</p>
-    </div>
-{% endfor %}
+<div class="course">
+    <p id="title">{{course.title}}</p>
+    <p id="description">{{course.description}}</p>
+    <p id="authors">{{course.authors}}</p>
+    <p id="duration">{{course.duration}}</p>
+    <p id="level">{{course.level}}</p>
+    <p id="audience">{{course.audience}}</p>
+</div>
