@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% for c in item %}
+    <div class="course">
+        <p id="title">Title: {{ c.title }}</p>
+        <p id="description">Description: {{ c.sideLink }}</p>
+        <p id="authors">Authors: {{ c.codeLink }}</p>
+        <p id="duration">Duration: {{ c.textExplanation }}</p>
+    </div>
+{% endfor %}

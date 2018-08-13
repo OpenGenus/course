@@ -9,25 +9,72 @@
 {% endblock %}
 
 {% block content %}
-<ul class="course" style="text-align: left">
-    {% for course in courses %}
-        <li><a>{{course.title}}</a>
-        <ul hidden>
-        {% for section in sections %}
-            <li><a>{{section.title}}</a></li>
-        {% endfor %}
+<p>
+    <div style="float: left; display: inline-block; width: 100px">
+        <ul class="table" style="list-style: none">
+            {% for course in courses %}
+                <li><a class="course" href={% url "course" course.title %}>{{course.title}}</a>
+                <ul style="display: none; list-style: none">
+                {% for section in sections %}
+                    {% if section.courseId == course %}
+                        <li><a class="section" href={% url "section" course.title section.title %}>{{section.title}}</a>
+                    {% endif %}
+                    <ul style="display: none; list-style: none">
+                    {% for item in items %}
+                        {% if item.courseId == course and item.sectionId == section %}
+                            <li><a class="item" href={% url "item" course.title section.title item.title %}>{{item.title}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul></li>
+                {% endfor %}
+                </ul></li>
+            {% endfor %}
         </ul>
-    {% endfor %}
-</ul>
+    </div>
+    <div id="content" style="display: inline-block; text-align: left; width: 500px"></div>
+</p>
 {% endblock%}
 
 {% block scripts %}
-    <script>
-    $(document).ready( function() {
-        $(".a").click( function(event) {
-            event.preventDefault();
-            console.log($(this).id);
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            console.log("ready");
+            $("a.section, a.course").click(function(event) {
+                event.preventDefault();
+                var div = $(this).siblings("ul");
+                if(!div.is(":visible")) {
+                    div.show();
+                } else {
+                    div.hide();
+                }
+                var url = $(this).attr("href");
+                console.log(url);
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(data) {
+                        document.getElementById("content").innerHTML = data;
+                    },
+                    error: function() {
+                        document.getElementById("content").innerHTML = "ERROR";
+                    }
+                });
+            });
+            $("a.item").click(function(event) {
+                event.preventDefault();
+                var url = $(this).attr("href");
+                console.log(url);
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(data) {
+                        document.getElementById("content").innerHTML = data;
+                    },
+                    error: function() {
+                        document.getElementById("content").innerHTML = "ERROR";
+                    }
+                });
+            });
         });
-    });
     </script>
 {% endblock %}

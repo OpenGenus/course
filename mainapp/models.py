@@ -9,7 +9,7 @@ class UserProfile(models.Model):
     discourse = models.URLField(null=True, blank=True)
     about = models.TextField()
     profilepic = models.FileField(blank=True,null=True,upload_to='profile_pic')
-    github =  models.URLField(null=True, blank=True)
+    github = models.URLField(null=True, blank=True)
     website = models.URLField(null=True,blank=True)
 
     def __str__(self):
@@ -28,6 +28,7 @@ post_save.connect(create_profile, sender=User)
 
 
 class Course(models.Model):
+    id = models.AutoField(primary_key=True, null=False, unique=True)
     title = models.CharField(max_length=50)
     description = models.TextField()
     authors = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='course_author')
@@ -37,6 +38,7 @@ class Course(models.Model):
 
 
 class Section(models.Model):
+    id = models.AutoField(primary_key=True, null=False, unique=True)
     courseId = models.ForeignKey(Course, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
@@ -45,8 +47,9 @@ class Section(models.Model):
 
 
 class CourseItem(models.Model):
-    course = models.OneToOneField(Course, on_delete=models.CASCADE)
-    section = models.OneToOneField(Section, on_delete=models.CASCADE)
+    id = models.AutoField(primary_key=True, null=False, unique=True)
+    courseId = models.ForeignKey(Course, on_delete=models.CASCADE)
+    sectionId = models.ForeignKey(Section, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     sideLink = models.CharField(max_length=50)
     codeLink = models.CharField(max_length=50)

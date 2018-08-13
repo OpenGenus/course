@@ -1,16 +1,8 @@
-{% extends 'base.html' %}
-{% load staticfiles %}
-
-{% block title %}
-    <title>Section</title>
-{% endblock %}
-
-{% block head %}
-{% endblock %}
-
-{% block content %}
-    <h1 style="text-align: center">Course</h1>
-
-    <table style="text-align: center">
-    </table>
-{% endblock%}
+{% for c in section %}
+    <div class="course">
+        <p id="title">Title: {{ c.title }}</p>
+        <p id="description">Description: {{ c.sideLink }}</p>
+        <p id="authors">Authors: {{ c.codeLink }}</p>
+        <p id="duration">Duration: {{ c.textExplanation }}</p>
+    </div>
+{% endfor %}
