@@ -20,16 +20,13 @@ def course(request, course_name):
 
 
 def section(request, course_name, section_name):
-    course = get_object_or_404(models.Course, title__iexact=course_name)
-    section = get_object_or_404(models.Section, title__iexact=section_name)
+    section = models.Section.objects.filter(title=section_name)
     context = {"section": section}
-    return render(request, 'course/{0}/{1}/'.format(course.title, section.title), context)
+    return render(request, 'section.html', context)
 
 
 def item(request, course_name, section_name, item_name):
-    course = get_object_or_404(models.Course, title__iexact=course_name)
-    section = get_object_or_404(models.Section, title__iexact=section_name)
-    item = get_object_or_404(models.Section, title__iexact=item_name)
+    item = models.CourseItem.objects.filter(title=item_name)
     context = {"item": item}
-    return render(request, 'course/{0}/{1}/{2}/'.format(course.title, section.title, item.title), context)
+    return render(request, 'item.html', context)
 
