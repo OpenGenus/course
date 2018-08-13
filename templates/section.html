@@ -1,8 +1,8 @@
 {% for c in section %}
     <div class="course">
-        <p id="title">c.title</p>
-        <p id="description">c.sideLink</p>
-        <p id="authors">c.codeLink</p>
-        <p id="duration">c.textExplanation</p>
+        <p id="title">Title: {{ c.title }}</p>
+        <p id="description">Description: {{ c.sideLink }}</p>
+        <p id="authors">Authors: {{ c.codeLink }}</p>
+        <p id="duration">Duration: {{ c.textExplanation }}</p>
     </div>
 {% endfor %}
