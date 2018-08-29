@@ -1,8 +1,8 @@
 {% for c in item %}
     <div class="course">
-        <p id="title">Title: {{ c.title }}</p>
-        <p id="description">Description: {{ c.sideLink }}</p>
-        <p id="authors">Authors: {{ c.codeLink }}</p>
-        <p id="duration">Duration: {{ c.textExplanation }}</p>
+        <p id="title">{{ c.title }}</p>
+        <p id="side-link">{{ c.sideLink }}</p>
+        <p id="code-link">{{ c.codeLink }}</p>
+        <p id="text-exp">{{ c.textExplanation }}</p>
     </div>
 {% endfor %}

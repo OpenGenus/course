@@ -6,55 +6,59 @@
 {% endblock %}
 
 {% block head %}
+    <style>
+        li {
+            border: solid black;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
 <p>
-    <div style="float: left; display: inline-block; width: 100px">
-        <ul class="table" style="list-style: none">
-            {% for course in courses %}
-                <li><a class="course" href={% url "course" course.title %}>{{course.title}}</a>
-                <ul style="display: none; list-style: none">
-                {% for section in sections %}
-                    {% if section.courseId == course %}
-                        <li><a class="section" href={% url "section" course.title section.title %}>{{section.title}}</a>
-                    {% endif %}
-                    <ul style="display: none; list-style: none">
-                    {% for item in items %}
-                        {% if item.courseId == course and item.sectionId == section %}
-                            <li><a class="item" href={% url "item" course.title section.title item.title %}>{{item.title}}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                    </ul></li>
-                {% endfor %}
-                </ul></li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div id="content" style="display: inline-block; text-align: left; width: 500px"></div>
+   <div style="float: left; display: inline-block; width: 100px">
+       <div class="course-list">
+           <ul class="table" style="list-style: none; padding: 0; margin: 0">
+               {% for course in courses %}
+                   <li><a class="course" href={% url "course" course.title %}>{{course.title}}</a>
+                       <div class="section-list" style="display:none">
+                           <ul style="list-style: none; padding: 0; margin: 0">
+                               {% for section in sections %}
+                                   {% if section.courseId == course %}
+                                       <li><a class="section" href={% url "section" course.title section.title %}>{{section.title}}</a>
+                                   {% endif %}
+                               <div class="item-list" style="display:none">
+                                   <ul style="list-style: none; padding: 0; margin: 0">
+                                       {% for item in items %}
+                                           {% if item.courseId == course and item.sectionId == section %}
+                                               <li><a class="item" href={% url "item" course.title section.title item.title %}>{{item.title}}</a></li>
+                                           {% endif %}
+                                       {% endfor %}
+                                   </ul></div></li>
+                               {% endfor %}
+                           </ul></div></li>
+               {% endfor %}
+           </ul>
+       </div>
+   </div>
+    <div id="content" style="display: inline-block; text-align: left; width: 500px;"></div>
 </p>
 {% endblock%}
 
 {% block scripts %}
     <script type="text/javascript" >
         $(document).ready(function() {
-            console.log("ready");
             $("a.section, a.course").click(function(event) {
                 event.preventDefault();
-                var div = $(this).siblings("ul");
+                var div = $(this).siblings("div");
                 if(!div.is(":visible")) {
-                    div.show();
+                    div.slideDown(200);
                 } else {
-                    div.hide();
+                    div.slideUp(200);
                 }
                 var url = $(this).attr("href");
-                console.log(url);
                 $.ajax({
                     type: "GET",
                     url: url,
-                    success: function(data) {
-                        document.getElementById("content").innerHTML = data;
-                    },
                     error: function() {
                         document.getElementById("content").innerHTML = "ERROR";
                     }
@@ -67,8 +71,21 @@
                 $.ajax({
                     type: "GET",
                     url: url,
+                    dataType: "HTML",
                     success: function(data) {
-                        document.getElementById("content").innerHTML = data;
+                        var articleId = $(data).find("#code-link");
+                        articleId = articleId[0].innerHTML;
+                        var apiLink = 'http://iq.opengenus.org/ghost/api/v0.1/posts/'+articleId+'/?client_id=ghost-frontend&client_secret=06875a67cb74';
+                        $.ajax({
+                            type: "GET",
+                            url: apiLink,
+                            success: function(json) {
+                                document.getElementById('content').innerHTML = json.posts[0].html;
+                            },
+                            error: function() {
+                                document.getElementById("content").innerHTML = "ERROR";
+                            }
+                        });
                     },
                     error: function() {
                         document.getElementById("content").innerHTML = "ERROR";

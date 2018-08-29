@@ -32,9 +32,12 @@ class Course(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     authors = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='course_author')
-    duration = models.TimeField()
+    duration = models.CharField(max_length=50)
     level = models.CharField(max_length=20)
     audience = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.title
 
 
 class Section(models.Model):
@@ -43,7 +46,10 @@ class Section(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     authors = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='section_author')
-    duration = models.TimeField()
+    duration = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.title
 
 
 class CourseItem(models.Model):
@@ -51,7 +57,10 @@ class CourseItem(models.Model):
     courseId = models.ForeignKey(Course, on_delete=models.CASCADE)
     sectionId = models.ForeignKey(Section, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
-    sideLink = models.CharField(max_length=50)
-    codeLink = models.CharField(max_length=50)
+    sideLink = models.CharField(max_length=500)
+    codeLink = models.CharField(max_length=500)
     textExplanation = models.TextField()
+
+    def __str__(self):
+        return self.title
 
